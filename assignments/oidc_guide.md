@@ -81,6 +81,7 @@ app.listen(port, () => console.log(`App listening to port http://localhost:${por
 Create `views/layouts/main.handlebars`
 
 ```handlebars
+{% raw %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -93,12 +94,15 @@ Create `views/layouts/main.handlebars`
 
 </body>
 </html>
+{% endraw %}
 ```
 
 And `views/home.handlebars`
 
 ```handlebars
+{% raw %}
 <h1>Hello {{ placeholder }}</h1>
+{% endraw %}
 ```
 
 ## Endpoints
