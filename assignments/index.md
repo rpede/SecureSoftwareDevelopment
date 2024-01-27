@@ -1,7 +1,7 @@
 # Assignments
 
 - [Pentest](pentest)
-- [Crypto](hybrid_crypto)
+- [Crypto](crypto)
 - [Mini-project](mini-project)
 - [Threat modeling](threat_modeling)
 - [OpenID Connect client](oidc)
