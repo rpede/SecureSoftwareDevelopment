@@ -1,5 +1,10 @@
 # OAuth 2.0 + OpenID Connect setup guide
 
+This guide assumes that you have Docker installed.
+
+You can find instructions on how to install docker engine
+[here](https://docs.docker.com/engine/install/).
+
 ## Identity Provider
 
 Setup an identity provider with:
