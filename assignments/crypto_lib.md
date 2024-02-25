@@ -23,8 +23,8 @@ You will need to do some research on your own.
 I don't expect you to implement any of the algorithms on your own.
 Just provide examples using existing implementations.
 
-You will need to submit a document with a code example for each algorithm listed
-below.
+You will need to submit a PDF document with a code example for each algorithm
+listed below.
 
 Please include links to resources and libraries you use.
 
