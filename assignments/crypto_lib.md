@@ -49,7 +49,7 @@ decrypt a message.
 That is [AES (Advanced Encryption
 Standard)](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard)
 algorithm, with a key size of 256 bit and used in either
-https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation#Galois/counter_(GCM)
+[Galois/counter (GCM)](https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation#Galois/counter_(GCM))
 or [CBC (Cipher block
 chaining)](https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation#Cipher_block_chaining_(CBC))
 mode.
