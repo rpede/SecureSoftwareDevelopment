@@ -106,3 +106,7 @@ Ed25519 is short for [EdDSA](https://en.wikipedia.org/wiki/EdDSA) with
 ### RSA (Rivest–Shamir–Adleman)
 
 Provide an example of encrypting with RSA and decrypting.
+
+### Key derivation
+
+Provide an example of using PBKDF2-HMAC-SHA256 to derive a key from a password.
