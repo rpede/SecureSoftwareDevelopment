@@ -29,8 +29,7 @@ The goal of this assignment is to develop a simple password manager.
 
 The password manager must be capable of safely storing credentials on a single 
 computer/device. 
-
-It should provide functionality for generating strong passwords. 
+It should also provide functionality for generating strong passwords. 
 
 Security and usability are the main priorities! 
 
@@ -39,7 +38,8 @@ However, the requirements increase with the group size.
 
 - 1 person: Focus on safely storing on a single device. 
 - 2 people: More emphasis on user interface - making it easy to use in a secure way. 
-- 3+ persons: Plan for how a user can access their credentials across devices. 
+- 3 persons: Plan for how a user can access their credentials across devices. 
+- 4 persons: Implement a way to access credentials across devices.
 
 I'm not expecting anything as advanced as in the papers you read. 
 
