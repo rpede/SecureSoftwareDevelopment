@@ -2,9 +2,9 @@
 
 ## Introduction
 
-Many tutorials and and framework documentation often only describe authorization
+Many tutorials and framework documentation often only describe authorization
 so far as to allow or deny based on whether a user has authenticated or not.
-Maybe they do a bit of role based access control.
+Maybe they do a bit of role-based access control.
 But that's where things usually stop.
 
 Simply checking that a user is authenticated is not enough for a real world
@@ -15,6 +15,18 @@ grained control.
 
 The aim of this assignment is for you to explorer this field within your
 tech-stack.
+
+## Context
+
+Imagine you are working on the backend for a news site.
+The site contains news articles written by journalists.
+Editors correct factual mistakes in articles and remove hateful comments.
+
+The business model rely on subscription fees and advertising.
+Subscribes can for a small monthly fee access a version of the site without
+adds.
+Guests can still read articles published on the site, but will be presented with
+ads.
 
 ## Policy
 
@@ -89,7 +101,7 @@ You can use either:
 - [JWT Bearer](https://jwt.io/introduction/)
 - [Session Cookie](https://cyberchimps.com/blog/session-cookies/)
 
-Frontend isn't required.
+Frontend isn't required, nor expected.
 A simple REST API is fine.
 
 I will accept solutions using in-memory data storage like Dictionary (C#),
