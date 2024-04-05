@@ -6,8 +6,9 @@ Passwordify is a password management service from BestVPN Inc.
 
 BestVPN is best known for their VPN service.
 Since the company was founded the VPN space has become a lot more competitive.
-To gain a competitive advantage they recently started to offer a password and
-secret management they call Passwordify to all their existing customers.
+To gain a competitive advantage they are planning to offer a password management
+solution as an addon to their VPN subscription.
+They call this new product "Passwordify".
 
 ## Security requirements
 
@@ -18,7 +19,7 @@ They main security requirements are:
 
 ## Sub-systems
 
-Passwordify consist of the following sub-systems:
+Passwordify will consist of the following sub-systems:
 
 - Desktop client
 - Mobile client
@@ -28,14 +29,16 @@ Passwordify consist of the following sub-systems:
 The source code for all sub-systems is kept in a
 [monorepo](https://en.wikipedia.org/wiki/Monorepo).
 
-Both desktop and mobile clients are build from the same .NET MAUI codebase.
+The plan is to build both desktop and mobile clients from the same .NET MAUI
+codebase.
 
-The web UI is a PHP application, since that is the technology their frontend team
-is most familiar with.
+The web UI will be a PHP application, since that is what they use for the main
+company site.
 
-REST API is a Node+Express application using Mongoose to communicate with a
-MongoDB database.
-The backend team was worried about SQLi so they decided to go with a NoSQL
+The REST API will be a Node+Express application using Mongoose to communicate
+with a MongoDB database.
+
+The backend team is worried about SQLi so they decided to go with a NoSQL
 database.
 They also thought NoSQL sounded cool and that a document store was fitting for
 their data model.
@@ -44,24 +47,36 @@ The API supports both cookie based authorization and JWT in custom header.
 Cookies are used for authorization of the web UI.
 JWT for mobile and desktop client.
 
-An Apache web server serves the PHP UI and acts as a reverse proxy for the REST
-API.
-They expect that the number of users will grow over time, in which case they will
-eventually reconfigure Apache to also act as a load balancer.
+They will use their existing Apache web server to serve the web UI for
+Passwordify, and it will also act as a reverse proxy for the REST API.
+They expect that the number of users will grow over time, in which case they
+will eventually reconfigure Apache to also act as a load balancer.
 
 All systems are hosted on-premise with in-house servers.
 They are behind a firewall with only HTTP and FTP traffic allowed from the internet.
 Firewall rules are relaxed from internal company network, since operations team
 needs full access to manage the servers.
 
-## Login
+## Functional requirements
 
-Users can login with either email or username and password.
-Password is compared against stored password hash using bcrypt (work factor 10).
+### Registration
 
-## Operations
+In order to ease adoption, they want users to be able to user their existing
+login, and then automatically create a password vault for the user first time
+they access the new Passwordify feature.
 
-Authenticated users can:
+### Login
+
+Users should be able login with a combination of password and then either email
+or username.
+The login process should look identical across clients (web, mobile & desktop).
+
+Side-note: A SHA512 of the password is currently stored in a MySQL database,
+used by the VPN service.
+
+### Operations
+
+Authenticated users should be able to:
 
 - Retrieve a list of names and vault IDs of vaults they are allowed to access.
 - Retrieve entire vault including credentials from vault ID.
@@ -77,18 +92,18 @@ Unauthenticated users can:
 
 ## Database
 
-This is the database model for the system.
+This is the intended database model.
 
-**User document**
+**User table in MySQL**
 
 | Field | Type |
 |-|-|
-| _id | ObjectId |
-| firstName | String |
-| lastName | String |
-| username | String |
-| email | String |
-| passwordHash | String |
+| id | int (primary key) |
+| firstName | varchar(255) |
+| lastName | varchar(255) |
+| username | varchar(100) |
+| email | varchar(100) |
+| passwordHash | binary(64) |
 
 **Vault document**
 
@@ -96,12 +111,12 @@ This is the database model for the system.
 |-|-|
 | _id | ObjectId |
 | userIds | Array (user reference) |
-| credentials | Array (embedded Credential document) |
+| credentials | Array (embedded vault Credential document) |
 
 *userIds* are the IDs of users that can access the vault.
 A vault can be shared with other users by adding them to the array.
 
-**Credential embedded document**
+**Vault Credential embedded document**
 
 | Field | Type |
 |-|-|
