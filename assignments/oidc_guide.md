@@ -24,6 +24,12 @@ Then bootstrap the project using:
 dotnet new mvc
 ```
 
+### Python
+
+For Python I will recommend
+[Flask](https://flask.palletsprojects.com/en/3.0.x/), unless your are already
+accustomed to a different framework.
+
 ### Node/Express
 
 Open a terminal/cmd/powershell
@@ -156,6 +162,22 @@ var parameters = new Dictionary<string, string?>
 var authorizationUri = QueryHelpers.AddQueryString(config.authorization_endpoint, parameters);
 ```
 
+**Python**
+
+```python
+parameters = {
+    "client_id": client_id,
+    "scope": "openid email phone address profile",
+    "response_type": "code",
+    "redirect_uri": redirect_uri,
+    "prompt": "login",
+    "state": state,
+    "code_challenge_method": "S256",
+    "code_challenge": create_challenge(code_verifier)
+}
+redirect_url = f"{authorization_endpoint}?{urllib.parse.urlencode(parameters)}"
+```
+
 **TypeScript**
 
 ```typescript
@@ -218,6 +240,9 @@ app.UseSession();
 
 See [documentation](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/app-state?view=aspnetcore-7.0) for more details.
 
+**Python**
+
+See [Flask-Caching](https://flask-caching.readthedocs.io/en/latest/index.html)
 
 **TypeScript**
 
@@ -251,6 +276,17 @@ public async Task<IActionResult> Callback(AuthorizationResponse query)
     // ...
     return View();
 }
+```
+
+**Python**
+
+```python
+@app.route('/callback')
+def callback():
+    state = request.args.get('state')
+    code = request.args.get('code')
+    # ...
+    return ""
 ```
 
 **TypeScript**
@@ -298,6 +334,21 @@ public class TokenResponse
     public string token_type { init; get; }
     public string refresh_token { init; get; }
 }
+```
+
+**Python**
+
+```python
+parameters = {
+    "grant_type": "authorization_code",
+    "code": code,
+    "redirect_uri": redirect_uri,
+    "code_verifier": code_verifier,
+    "client_id": client_id,
+    "client_secret": client_secret
+}
+qs = urllib.parse.urlencode(parameters)
+return requests.post(f"{token_endpoint}?{qs}", data=parameters).json()
 ```
 
 **TypeScript**
@@ -350,6 +401,13 @@ var response = await http.GetAsync(config.userinfo_endpoint);
 var content = await response.Content.ReadFromJsonAsync<object?>();
 ```
 
+**Python**
+
+```python
+headers = {"Authorization": f"Bearer {access_token}"}
+content = requests.get(userinfo_endpoint, headers=headers).json()
+```
+
 **TypeScript**
 
 ```typescript
@@ -391,6 +449,11 @@ jwks.SkipUnresolvedJsonWebKeys = false;
 
 Then use `JwtSecurityTokenHandler` to validate/verify the token.
 
+**Python**
+
+You can use [PyJWT](https://pyjwt.readthedocs.io/en/latest/index.html) to verify
+ID Token.
+
 **TypeScript**
 
 ```typescript
@@ -423,6 +486,10 @@ What are [session & cookies](https://stackoverflow.com/questions/11142882/what-a
 **C#**
 
 Learn about [Session and state management in ASP.NET Core](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/app-state?view=aspnetcore-7.0).
+
+**Python**
+
+See [Flask Sessions](https://flask.palletsprojects.com/en/3.0.x/quickstart/#sessions)
 
 **TypeScript**
 
