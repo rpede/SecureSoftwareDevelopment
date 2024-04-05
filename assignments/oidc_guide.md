@@ -145,7 +145,19 @@ The Login endpoint should redirect the browser to a URL similar to the following
 
 `http://localhost:8080/realms/master/protocol/openid-connect/auth?client_id=client_id&scope=openid email phone address profile&response_type=code&redirect_uri=http://localhost:5138/Home/Callback&prompt=login&state=97tvtZHsHTV4I5parGxBJ-sRF5Lml_JGmb21VXwtoaE&code_challenge_method=plain&code_challenge=es1kPi2mRaxvo4Y3cb8gRFRmYrpJzyO9FelyjMrgy0w`
 
-**C#**
+
+Value | Description
+-|-
+clientId | Client ID for the client you created in Keycloak
+callback | Your endpoint that handles callback
+state | Long random string that you store in cache
+codeVerifier | Long random string that you store in cache
+
+Note *code_challenge/code_verifier* are part of the PKCE extension to OAuth 2.0
+
+For generating the random strings you should use a Cryptographically secure pseudorandom number generator (CSPRNG).
+
+### C#
 
 ```csharp
 var parameters = new Dictionary<string, string?>
@@ -162,7 +174,7 @@ var parameters = new Dictionary<string, string?>
 var authorizationUri = QueryHelpers.AddQueryString(config.authorization_endpoint, parameters);
 ```
 
-**Python**
+### Python
 
 ```python
 parameters = {
@@ -178,7 +190,7 @@ parameters = {
 redirect_url = f"{authorization_endpoint}?{urllib.parse.urlencode(parameters)}"
 ```
 
-**TypeScript**
+### TypeScript
 
 ```typescript
 const parameters = {
@@ -195,21 +207,15 @@ const parameters = {
 const authorizationUri = `${config.authorization_endpoint}?${new URLSearchParams(parameters)}`;
 ```
 
-Value | Description
--|-
-clientId | Client ID for the client you created in Keycloak
-callback | Your endpoint that handles callback
-state | Long random string that you store in cache
-codeVerifier | Long random string that you store in cache
+## Caching
 
-Note *code_challenge/code_verifier* are part of the PKCE extension to OAuth 2.0
-
-For generating the random strings you should use a Cryptographically secure pseudorandom number generator (CSPRNG).
+You need to `code_verifier` because you need it to verify the callback.
+Use `state` as key in your cache.
 
 In a real app you would use something like database or redis for cache.
 However here we simplify a bit and just use an in-memory collection instead.
 
-**C#**
+### C#
 
 ```csharp
 private static readonly Dictionary<string, string> _cache = new();
@@ -240,11 +246,11 @@ app.UseSession();
 
 See [documentation](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/app-state?view=aspnetcore-7.0) for more details.
 
-**Python**
+### Python
 
 See [Flask-Caching](https://flask-caching.readthedocs.io/en/latest/index.html)
 
-**TypeScript**
+### TypeScript
 
 ```typescript
 const cache = new Map<string, string>();
@@ -265,7 +271,7 @@ In the callback you should:
 
 You can decode and extract the needed values from query parameters as following.
 
-**C#**
+### C#
 
 ```csharp
 public record AuthorizationResponse(string state, string code);
@@ -278,7 +284,7 @@ public async Task<IActionResult> Callback(AuthorizationResponse query)
 }
 ```
 
-**Python**
+### Python
 
 ```python
 @app.route('/callback')
@@ -289,7 +295,7 @@ def callback():
     return ""
 ```
 
-**TypeScript**
+### TypeScript
 
 ```typescript
 type AuthorizationResponse = { state: string, code: string };
@@ -301,11 +307,11 @@ app.get('/callback', (req, res) => {
 });
 ```
 
-### Exchange authorization code for tokens
+## Exchange authorization code for tokens
 
 You need to exchange the authorization code for tokens.
 
-**C#**
+### C#
 
 ```csharp
 var parameters = new Dictionary<string, string?>
@@ -336,7 +342,7 @@ public class TokenResponse
 }
 ```
 
-**Python**
+### Python
 
 ```python
 parameters = {
@@ -351,7 +357,7 @@ qs = urllib.parse.urlencode(parameters)
 return requests.post(f"{token_endpoint}?{qs}", data=parameters).json()
 ```
 
-**TypeScript**
+### TypeScript
 
 ```typescript
 const parameters = {
@@ -383,11 +389,11 @@ type TokenResponse = {
 }
 ```
 
-### Fetch user info
+## Fetch user info
 
 Now that you have an access token you can use it to fetch user info
 
-**C#**
+### C#
 
 ```csharp
 var http = new HttpClient
@@ -401,14 +407,14 @@ var response = await http.GetAsync(config.userinfo_endpoint);
 var content = await response.Content.ReadFromJsonAsync<object?>();
 ```
 
-**Python**
+### Python
 
 ```python
 headers = {"Authorization": f"Bearer {access_token}"}
 content = requests.get(userinfo_endpoint, headers=headers).json()
 ```
 
-**TypeScript**
+### TypeScript
 
 ```typescript
 const response = await fetch(config.userinfo_endpoint,
@@ -421,24 +427,24 @@ const response = await fetch(config.userinfo_endpoint,
 const content = await response.json();
 ```
 
-## Securing your solution
+# Securing your solution
 
 There is a couple of things you need to do to secure your implementation.
 
-### Hash the code verifier
+## Hash the code verifier
 
 For Authorization Request you should replace `code_challenge` with a base64 url
 encoded sha256 hash of `code_verifier`.
 Also change `code_challenge_method` to be `S256`.
 
-### Verify ID Token
+## Verify ID Token
 
 It is very important that you verify authenticity and integrity of the ID token.
 
 For that we first need to fetch the public part of the key that was used to sign
 the token.
 
-**C#**
+### C#
 
 ```csharp
 var response = await new HttpClient().GetAsync(config.jwks_uri);
@@ -449,12 +455,12 @@ jwks.SkipUnresolvedJsonWebKeys = false;
 
 Then use `JwtSecurityTokenHandler` to validate/verify the token.
 
-**Python**
+### Python
 
 You can use [PyJWT](https://pyjwt.readthedocs.io/en/latest/index.html) to verify
 ID Token.
 
-**TypeScript**
+### TypeScript
 
 ```typescript
 import jwksClient from 'jwks-rsa';
@@ -472,7 +478,7 @@ function getKey(header: JwtHeader, callback: any) {
 
 Then use `verify` function from `jsonwebtoken` package to validate/verify the token.
 
-### Session
+## Session
 
 Last step after establishing a valid user identity is to setup a session in your
 web application.
@@ -483,15 +489,15 @@ Therefore the best way to maintain a session is with a cookie.
 
 What are [session & cookies](https://stackoverflow.com/questions/11142882/what-are-cookies-and-sessions-and-how-do-they-relate-to-each-other)?
 
-**C#**
+### C#
 
 Learn about [Session and state management in ASP.NET Core](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/app-state?view=aspnetcore-7.0).
 
-**Python**
+### Python
 
 See [Flask Sessions](https://flask.palletsprojects.com/en/3.0.x/quickstart/#sessions)
 
-**TypeScript**
+### TypeScript
 
 For express you can use the [session
 middleware](https://www.npmjs.com/package/express-session).
