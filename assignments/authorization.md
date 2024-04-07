@@ -20,10 +20,11 @@ tech-stack.
 
 Imagine you are working on the backend for a news site.
 The site contains news articles written by journalists.
-Editors correct factual mistakes in articles and remove hateful comments.
+The site have editors which correct factual mistakes in articles and remove
+hateful comments.
 
 The business model rely on subscription fees and advertising.
-Subscribes can for a small monthly fee access a version of the site without
+Subscribers can, for a small monthly fee access a version of the site without
 adds.
 Guests can still read articles published on the site, but will be presented with
 ads.
