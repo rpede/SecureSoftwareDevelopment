@@ -4,7 +4,7 @@ The "CI/CD Goat" is a deliberately vulnerable Continuous Integration/Continuous
 Deployment (CI/CD) environment designed to learn about various security risks
 associated with CI/CD systems.
 
-[Learn more](https://www.cidersecurity.io/blog/research/ci-cd-goat/)
+[Learn more](https://web.archive.org/web/20231206213534/https://www.cidersecurity.io/blog/research/ci-cd-goat/)
 
 It basically bunch of a CTF (capture the flag) challenges.
 
