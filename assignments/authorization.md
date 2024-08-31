@@ -10,15 +10,14 @@ But that's where things usually stop.
 Simply checking that a user is authenticated is not enough for a real world
 application.
 
-Following the principle of least privilege we almost always need more fine
-grained control.
+Following the principle of least privilege we almost always need more fine-grained control.
 
 The aim of this assignment is for you to explorer this field within your
 tech-stack.
 
 ## Context
 
-Imagine you are working on the backend for a news site.
+Imagine you are working on the back-end for a news site.
 The site contains news articles written by journalists.
 The site have editors which correct factual mistakes in articles and remove
 hateful comments.
@@ -35,14 +34,14 @@ Your task is to implement authorization as a proof-of-concept that enforces the
 following policy.
 
 - Editor can:
-    - Edit, and delete articles.
-    - Edit and delete user comments.
+  - Edit, and delete articles.
+  - Edit and delete user comments.
 - Writer / Journalist can:
-    - Create and edit their own articles.
+  - Create and edit their own articles.
 - Subscriber / Registered User can:
-    - Comment on articles.
+  - Comment on articles.
 - Guest / Public User can:
-    - Read articles.
+  - Read articles.
 
 ## Schema
 
@@ -102,7 +101,7 @@ You can use either:
 - [JWT Bearer](https://jwt.io/introduction/)
 - [Session Cookie](https://cyberchimps.com/blog/session-cookies/)
 
-Frontend isn't required, nor expected.
+Front-end isn't required, nor expected.
 A simple REST API is fine.
 
 I will accept solutions using in-memory data storage like Dictionary (C#),
@@ -113,3 +112,4 @@ Though a database is preferred.
 
 Link to GitHub repository with the code for your solution and README with
 commands to get started.
+

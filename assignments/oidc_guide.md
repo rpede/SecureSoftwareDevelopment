@@ -8,9 +8,9 @@ credentials in Keycloak.
 ## Project setup
 
 You don't need any client side scripting to solve the assignment.
-Actually I would recommend to do without, because it just adds complexity.
+Actually I would recommend doing without, because it just adds complexity.
 
-### .NET/C#
+### .NET/C
 
 Open a terminal/cmd/powershell
 
@@ -27,7 +27,7 @@ dotnet new mvc
 ### Python
 
 For Python I will recommend
-[Flask](https://flask.palletsprojects.com/en/3.0.x/), unless your are already
+[Flask](https://flask.palletsprojects.com/en/3.0.x/), unless you are already
 accustomed to a different framework.
 
 ### Node/Express
@@ -49,11 +49,12 @@ Add following to `tsconfig.json`
 
 ```json
 {
-    "outDir": "./dist",
+  "outDir": "./dist"
 }
 ```
 
 And include following to `package.json`
+
 ```json
 {
   "scripts": {
@@ -67,38 +68,40 @@ And include following to `package.json`
 Create a `index.ts` file with something like:
 
 ```typescript
-import express from 'express';
-import { engine } from 'express-handlebars';//Sets our app to use the handlebars engine
+import express from "express";
+import { engine } from "express-handlebars"; //Sets our app to use the handlebars engine
 
 const app = express();
 
-app.engine('handlebars', engine());
-app.set('view engine', 'handlebars');
-app.set('views', './views');
+app.engine("handlebars", engine());
+app.set("view engine", "handlebars");
+app.set("views", "./views");
 
-app.get('/', (req, res) => {
-    res.render('home', {placeholder: "world"});
+app.get("/", (req, res) => {
+  res.render("home", { placeholder: "world" });
 });
 
 const port = 3000;
-app.listen(port, () => console.log(`App listening to port http://localhost:${port}`));
+app.listen(port, () =>
+  console.log(`App listening to port http://localhost:${port}`),
+);
 ```
 
 Create `views/layouts/main.handlebars`
 
 ```handlebars
 {% raw %}
-<!DOCTYPE html>
+
 <html>
-<head>
-    <meta charset="utf-8">
+  <head>
+    <meta charset="utf-8" />
     <title>Example App</title>
-</head>
-<body>
+  </head>
+  <body>
 
     {{{body}}}
 
-</body>
+  </body>
 </html>
 {% endraw %}
 ```
@@ -107,7 +110,7 @@ And `views/home.handlebars`
 
 ```handlebars
 {% raw %}
-<h1>Hello {{ placeholder }}</h1>
+<h1>Hello {{placeholder}}</h1>
 {% endraw %}
 ```
 
@@ -116,11 +119,11 @@ And `views/home.handlebars`
 Your application needs the following endpoints.
 If you use different paths for your endpoints you need to adjust accordingly.
 
- Path | Name | Purpose
--|-|-
- / | Home | Landing page with login link
- /login | Login | Redirects to Keycloak
- /callback | Callback | Exchange code for tokens
+| Path      | Name     | Purpose                      |
+| --------- | -------- | ---------------------------- |
+| /         | Home     | Landing page with login link |
+| /login    | Login    | Redirects to Keycloak        |
+| /callback | Callback | Exchange code for tokens     |
 
 Home and Callback (redirect URI) should be added to the client settings in [Keycloak admin](http://localhost:8080/admin/)
 
@@ -145,19 +148,18 @@ The Login endpoint should redirect the browser to a URL similar to the following
 
 `http://localhost:8080/realms/master/protocol/openid-connect/auth?client_id=client_id&scope=openid email phone address profile&response_type=code&redirect_uri=http://localhost:5138/Home/Callback&prompt=login&state=97tvtZHsHTV4I5parGxBJ-sRF5Lml_JGmb21VXwtoaE&code_challenge_method=plain&code_challenge=es1kPi2mRaxvo4Y3cb8gRFRmYrpJzyO9FelyjMrgy0w`
 
+| Value        | Description                                      |
+| ------------ | ------------------------------------------------ |
+| clientId     | Client ID for the client you created in Keycloak |
+| callback     | Your endpoint that handles callback              |
+| state        | Long random string that you store in cache       |
+| codeVerifier | Long random string that you store in cache       |
 
-Value | Description
--|-
-clientId | Client ID for the client you created in Keycloak
-callback | Your endpoint that handles callback
-state | Long random string that you store in cache
-codeVerifier | Long random string that you store in cache
-
-Note *code_challenge/code_verifier* are part of the PKCE extension to OAuth 2.0
+Note _code_challenge/code_verifier_ are part of the PKCE extension to OAuth 2.0
 
 For generating the random strings you should use a Cryptographically secure pseudorandom number generator (CSPRNG).
 
-### C#
+### C-Sharp (C#)
 
 ```csharp
 var parameters = new Dictionary<string, string?>
@@ -194,14 +196,14 @@ redirect_url = f"{authorization_endpoint}?{urllib.parse.urlencode(parameters)}"
 
 ```typescript
 const parameters = {
-    "client_id": clientId,
-    "scope": "openid email phone address profile",
-    "response_type": "code",
-    "redirect_uri": callback,
-    "prompt": "login",
-    "state": state,
-    "code_challenge_method": "plain",
-    "code_challenge": codeVerifier
+  client_id: clientId,
+  scope: "openid email phone address profile",
+  response_type: "code",
+  redirect_uri: callback,
+  prompt: "login",
+  state: state,
+  code_challenge_method: "plain",
+  code_challenge: codeVerifier,
 };
 
 const authorizationUri = `${config.authorization_endpoint}?${new URLSearchParams(parameters)}`;
@@ -215,7 +217,7 @@ Use `state` as key in your cache.
 In a real app you would use something like database or redis for cache.
 However here we simplify a bit and just use an in-memory collection instead.
 
-### C#
+### C-Sharp (C#)
 
 ```csharp
 private static readonly Dictionary<string, string> _cache = new();
@@ -271,7 +273,7 @@ In the callback you should:
 
 You can decode and extract the needed values from query parameters as following.
 
-### C#
+### C-Sharp (C#)
 
 ```csharp
 public record AuthorizationResponse(string state, string code);
@@ -298,12 +300,12 @@ def callback():
 ### TypeScript
 
 ```typescript
-type AuthorizationResponse = { state: string, code: string };
+type AuthorizationResponse = { state: string; code: string };
 
-app.get('/callback', (req, res) => {
-    const { state, code } = (req.query as AuthorizationResponse);
-    // ...
-    res.send();
+app.get("/callback", (req, res) => {
+  const { state, code } = req.query as AuthorizationResponse;
+  // ...
+  res.send();
 });
 ```
 
@@ -311,7 +313,7 @@ app.get('/callback', (req, res) => {
 
 You need to exchange the authorization code for tokens.
 
-### C#
+### C-Sharp (C#)
 
 ```csharp
 var parameters = new Dictionary<string, string?>
@@ -361,18 +363,18 @@ return requests.post(f"{token_endpoint}?{qs}", data=parameters).json()
 
 ```typescript
 const parameters = {
-    "grant_type": "authorization_code",
-    "code": code,
-    "redirect_uri": redirectUri,
-    "code_verifier": codeVerifier,
-    "client_id": clientId,
-    "client_secret": clientSecret
+  grant_type: "authorization_code",
+  code: code,
+  redirect_uri: redirectUri,
+  code_verifier: codeVerifier,
+  client_id: clientId,
+  client_secret: clientSecret,
 };
 const response = await fetch(config.token_endpoint, {
-    method: 'POST',
-    body: new URLSearchParams(parameters)
+  method: "POST",
+  body: new URLSearchParams(parameters),
 });
-const payload = await response.json()
+const payload = await response.json();
 return payload as TokenResponse;
 ```
 
@@ -380,20 +382,20 @@ And TokenResponse defined as
 
 ```typescript
 type TokenResponse = {
-    access_token: string;
-    expires_in: number;
-    id_token: string;
-    scope: string;
-    token_type: string;
-    refresh_token: string;
-}
+  access_token: string;
+  expires_in: number;
+  id_token: string;
+  scope: string;
+  token_type: string;
+  refresh_token: string;
+};
 ```
 
 ## Fetch user info
 
 Now that you have an access token you can use it to fetch user info
 
-### C#
+### C-Sharp (C#)
 
 ```csharp
 var http = new HttpClient
@@ -417,13 +419,11 @@ content = requests.get(userinfo_endpoint, headers=headers).json()
 ### TypeScript
 
 ```typescript
-const response = await fetch(config.userinfo_endpoint,
-    {
-        headers:
-        {
-            "Authorization": "Bearer " + accessToken
-        }
-    });
+const response = await fetch(config.userinfo_endpoint, {
+  headers: {
+    Authorization: "Bearer " + accessToken,
+  },
+});
 const content = await response.json();
 ```
 
@@ -444,7 +444,7 @@ It is very important that you verify authenticity and integrity of the ID token.
 For that we first need to fetch the public part of the key that was used to sign
 the token.
 
-### C#
+### C-Sharp (C#)
 
 ```csharp
 var response = await new HttpClient().GetAsync(config.jwks_uri);
@@ -463,16 +463,16 @@ ID Token.
 ### TypeScript
 
 ```typescript
-import jwksClient from 'jwks-rsa';
+import jwksClient from "jwks-rsa";
 
 var client = jwksClient({
-    jwksUri: config.jwks_uri,
+  jwksUri: config.jwks_uri,
 });
 function getKey(header: JwtHeader, callback: any) {
-    client.getSigningKey(header.kid, function (err, key: any) {
-        var signingKey = key.publicKey || key.rsaPublicKey;
-        callback(null, signingKey);
-    });
+  client.getSigningKey(header.kid, function (err, key: any) {
+    var signingKey = key.publicKey || key.rsaPublicKey;
+    callback(null, signingKey);
+  });
 }
 ```
 
@@ -480,16 +480,16 @@ Then use `verify` function from `jsonwebtoken` package to validate/verify the to
 
 ## Session
 
-Last step after establishing a valid user identity is to setup a session in your
+Last step after establishing a valid user identity is to set up a session in your
 web application.
 So that verified user identity can persist across HTTP requests.
 
 By following this guide you will be using server-side rendering of HTML (no JavaScript frontend).
-Therefore the best way to maintain a session is with a cookie.
+Therefore, the best way to maintain a session is with a cookie.
 
 What are [session & cookies](https://stackoverflow.com/questions/11142882/what-are-cookies-and-sessions-and-how-do-they-relate-to-each-other)?
 
-### C#
+### C-Sharp (C#)
 
 Learn about [Session and state management in ASP.NET Core](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/app-state?view=aspnetcore-7.0).
 
@@ -499,5 +499,6 @@ See [Flask Sessions](https://flask.palletsprojects.com/en/3.0.x/quickstart/#sess
 
 ### TypeScript
 
-For express you can use the [session
+For express, you can use the [session
 middleware](https://www.npmjs.com/package/express-session).
+

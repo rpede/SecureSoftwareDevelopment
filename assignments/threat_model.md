@@ -6,15 +6,15 @@ Passwordify is a password management service from BestVPN Inc.
 
 The main product of BestVPN is their VPN service.
 Since the company was founded, the VPN space has become a lot more competitive.
-To gain a competitive advantage they are planning to offer a password management
-solution as an addon to their VPN subscription.
+To gain a competitive advantage they are planning to offer a password
+management solution as an add-on to their VPN subscription.
 They will call this new product "Passwordify".
 
 ## Security requirements
 
 The main security requirements are:
 
-- Keep credentials protected from un-authorized access.
+- Keep credentials protected from unauthorized access.
 - All data must be encrypted [at rest](https://en.wikipedia.org/wiki/Data_at_rest) (on servers).
 
 ## Sub-systems
@@ -38,7 +38,7 @@ company site.
 The REST API will be a Node+Express application using Mongoose to communicate
 with a MongoDB database.
 
-The backend team is worried about SQLi so they decided to go with a NoSQL
+The back-end team is worried about SQLi, so they decided to go with a NoSQL
 database.
 They also thought NoSQL sounded cool and that a document store was fitting for
 their data model.
@@ -98,34 +98,34 @@ This is the intended database model.
 
 This table is shared with the VPN service.
 
-| Field | Type |
-|-|-|
-| id | int (primary key) |
-| firstName | varchar(255) |
-| lastName | varchar(255) |
-| username | varchar(100) |
-| email | varchar(100) |
-| passwordHash | binary(64) |
+| Field        | Type              |
+| ------------ | ----------------- |
+| id           | int (primary key) |
+| firstName    | varchar(255)      |
+| lastName     | varchar(255)      |
+| username     | varchar(100)      |
+| email        | varchar(100)      |
+| passwordHash | binary(64)        |
 
 **Vault document**
 
-| Field | Type |
-|-|-|
-| _id | ObjectId |
-| userIds | Array (user reference) |
+| Field       | Type                                       |
+| ----------- | ------------------------------------------ |
+| \_id        | ObjectId                                   |
+| userIds     | Array (user reference)                     |
 | credentials | Array (embedded vault Credential document) |
 
-*userIds* are the IDs of users that can access the vault.
+_userIds_ are the IDs of users that can access the vault.
 A vault can be shared with other users by adding them to the array.
 
 **Vault Credential embedded document**
 
-| Field | Type |
-|-|-|
-| name | String |
-| siteUrl | String? |
-| username | String |
-| password | String |
+| Field    | Type    |
+| -------- | ------- |
+| name     | String  |
+| siteUrl  | String? |
+| username | String  |
+| password | String  |
 
 The engineers didn't see a need to encrypt vaults or credentials individually
 since [full disk encryption](https://en.wikipedia.org/wiki/Disk_encryption#Full_disk_encryption)
@@ -160,3 +160,4 @@ Also include any refinements to the security requirements.
 
 [Learn about security
 requirements](https://www.synopsys.com/blogs/software-security/software-security-requirements.html)
+

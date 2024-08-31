@@ -13,7 +13,7 @@ cryptographic functions.
 I will provide name and configuration, then you do some research on what
 libraries or APIs to use in your favorite programming language.
 
-Some functions will be build into the standard library.
+Some functions will be built into the standard library.
 But others, might require you to search for packages.
 
 You will need to do some research on your own.
@@ -33,7 +33,7 @@ Please include links to resources and libraries you use.
 
 ### cryptographic random number generator (CRNG)
 
-Provide a code example that use secure random generate to to generate a 256 bit
+Provide a code example that use secure random generate to generate a 256 bit
 value.
 
 This value can be used as encryption key.
@@ -49,12 +49,12 @@ decrypt a message.
 That is [AES (Advanced Encryption
 Standard)](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard)
 algorithm, with a key size of 256 bit and used in either
-[Galois/counter (GCM)](https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation#Galois/counter_(GCM))
+[Galois/counter (GCM)](<https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation#Galois/counter_(GCM)>)
 or [CBC (Cipher block
-chaining)](https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation#Cipher_block_chaining_(CBC))
+chaining)](<https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation#Cipher_block_chaining_(CBC)>)
 mode.
 
-Your example should encrypt a message an decrypt it again.
+Your example should encrypt a message a decrypt it again.
 
 Use previous code example to generate an encryption key.
 
@@ -75,9 +75,9 @@ You will need the authentication tag to decrypt.
 
 Provide an example that uses **SHA512** to generate a hash of an input.
 
-That is [SHA-2](https://en.wikipedia.org/wiki/SHA-2) with an size of 512 bits.
+That is [SHA-2](https://en.wikipedia.org/wiki/SHA-2) with a size of 512 bits.
 
-SHA256 is also commonly used, as a sidenote.
+SHA256 is also commonly used, as a side note.
 
 ### Message Authentication Code (MAC)
 
@@ -88,8 +88,8 @@ You can generate a shared secret using the code from your first example.
 
 ### Diffie-Hellman key exchange
 
-Provide an example of using Curve25519 ECDH key exchange
-for two parties to compute to compute the same shared secret.
+Provide an example of using Curve25519 ECDH key exchange for two parties to
+compute the same shared secret.
 
 That is [elliptic-curve diffie-Hellman
 (ECDH)](https://en.wikipedia.org/wiki/Elliptic-curve_Diffie%E2%80%93Hellman)
@@ -111,6 +111,6 @@ Provide an example of encrypting with RSA and decrypting.
 
 Provide an example of using PBKDF2-HMAC-SHA512 to derive a key from a password.
 
-That is [PBKDF2 (Password-Based Key Derivation Function
-2)](https://en.wikipedia.org/wiki/PBKDF2) using HMAC-SHA512 as the underlaying
+That is [PBKDF2 (Password-Based Key Derivation Function 2)](https://en.wikipedia.org/wiki/PBKDF2) using HMAC-SHA512 as the underlaying
 algorithm.
+

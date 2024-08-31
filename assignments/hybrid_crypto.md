@@ -14,7 +14,7 @@ Write a program that uses hybrid cryptography to send messages.
 
 Use asymmetric cryptography in combination with key exchange to share a session
 key.
-Then use symmetric cryptography to a exchange message using the session key.
+Then use symmetric cryptography to an exchange message using the session key.
 
 I recommend Elliptic-curve Diffie–Hellman (ECDH) for key exchange and
 AES-GCM-256 for messages.
@@ -33,7 +33,7 @@ Modify your program such that you can exchange messages over a [TCP
 socket](https://www.geeksforgeeks.org/socket-in-computer-network/) or
 [WebSocket](https://www.geeksforgeeks.org/what-is-web-socket-and-how-it-is-different-from-the-http/).
 
-You will need to programs.
+You will need to program.
 One that listens for connections (server).
 And another that connects to the first (client).
 
@@ -44,10 +44,11 @@ work together. Including to padding scheme.
 
 There are different standard formats for keys/certificates.
 An example is X.509 with ASN.1-DER encoding.
-Find out how you can export the public key in a format that can be sends over
+Find out how you can export the public key in a format that can be sent over
 the socket and imported at the other end.
 
 - [TCP Overview in .NET](https://learn.microsoft.com/en-us/dotnet/fundamentals/networking/sockets/tcp-classes)
 - [Python - Socket Programming HOWTO](https://docs.python.org/3/howto/sockets.html)
 - [A Guide to Java Sockets](https://www.baeldung.com/a-guide-to-java-sockets)
 - [Socket.IO (JavaScript)](https://socket.io/)
+

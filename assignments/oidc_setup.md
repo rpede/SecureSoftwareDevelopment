@@ -7,7 +7,8 @@ You can find instructions on how to install docker engine
 
 ## Identity Provider
 
-Setup an identity provider with:
+Set up an identity provider with:
+
 ```sh
 docker run -p 8080:8080 -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=admin quay.io/keycloak/keycloak:21.1.0 start-dev
 ```
@@ -24,7 +25,7 @@ Under "Clients" in sidebar, click "Create Client".
 
 Client Type: OpenID Connect
 
-Client ID: type an id for your client
+Client ID: type an ID for your client
 
 **Capability Config**
 

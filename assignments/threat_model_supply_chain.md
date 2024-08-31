@@ -14,7 +14,7 @@ They call this new product "Passwordify".
 
 They main security requirements are:
 
-- Keep credentials protected from un-authorized access.
+- Keep credentials protected from unauthorized access.
 - All data must be encrypted [at rest](https://en.wikipedia.org/wiki/Data_at_rest) (on servers).
 
 ## Sub-systems
@@ -38,7 +38,7 @@ company site.
 The REST API will be a Node+Express application using Mongoose to communicate
 with a MongoDB database.
 
-The backend team is worried about SQLi so they decided to go with a NoSQL
+The backend team is worried about SQLi, so they decided to go with a NoSQL
 database.
 They also thought NoSQL sounded cool and that a document store was fitting for
 their data model.
@@ -96,34 +96,34 @@ This is the intended database model.
 
 **User table in MySQL**
 
-| Field | Type |
-|-|-|
-| id | int (primary key) |
-| firstName | varchar(255) |
-| lastName | varchar(255) |
-| username | varchar(100) |
-| email | varchar(100) |
-| passwordHash | binary(64) |
+| Field        | Type              |
+| ------------ | ----------------- |
+| id           | int (primary key) |
+| firstName    | varchar(255)      |
+| lastName     | varchar(255)      |
+| username     | varchar(100)      |
+| email        | varchar(100)      |
+| passwordHash | binary(64)        |
 
 **Vault document**
 
-| Field | Type |
-|-|-|
-| _id | ObjectId |
-| userIds | Array (user reference) |
+| Field       | Type                                       |
+| ----------- | ------------------------------------------ |
+| \_id        | ObjectId                                   |
+| userIds     | Array (user reference)                     |
 | credentials | Array (embedded vault Credential document) |
 
-*userIds* are the IDs of users that can access the vault.
+_userIds_ are the IDs of users that can access the vault.
 A vault can be shared with other users by adding them to the array.
 
 **Vault Credential embedded document**
 
-| Field | Type |
-|-|-|
-| name | String |
-| siteUrl | String? |
-| username | String |
-| password | String |
+| Field    | Type    |
+| -------- | ------- |
+| name     | String  |
+| siteUrl  | String? |
+| username | String  |
+| password | String  |
 
 The engineers didn't see a need to encrypt vaults or credentials individually
 since [full disk encryption](https://en.wikipedia.org/wiki/Disk_encryption#Full_disk_encryption)
@@ -150,7 +150,7 @@ The company trust the competence of their developers. So if it builds, it gets s
 Build artifacts for all the subsystem is automatically uploaded to the company
 FTP server.
 Only the installation for desktop client is linked to from the company website.
-The web UI and REST API are uploaded as [tarballs](https://en.wikipedia.org/wiki/Tar_(computing)).
+The web UI and REST API are uploaded as [tarballs](<https://en.wikipedia.org/wiki/Tar_(computing)>).
 
 A [cron](https://en.wikipedia.org/wiki/Cron) job looks for new version of the
 web UI and REST API.
