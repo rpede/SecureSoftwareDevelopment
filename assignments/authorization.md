@@ -13,13 +13,13 @@ application.
 Following the principle of least privilege we almost always need more fine-grained control.
 
 The aim of this assignment is for you to explorer this field within your
-tech-stack.
+tech-stack of choice.
 
 ## Context
 
 Imagine you are working on the back-end for a news site.
 The site contains news articles written by journalists.
-The site have editors which correct factual mistakes in articles and remove
+The site have editors which can correct factual mistakes in articles and remove
 hateful comments.
 
 The business model rely on subscription fees and advertising.
@@ -27,6 +27,8 @@ Subscribers can, for a small monthly fee access a version of the site without
 adds.
 Guests can still read articles published on the site, but will be presented with
 ads.
+
+(Implementing ads are part of this assignment)
 
 ## Policy
 
@@ -74,18 +76,8 @@ CREATE TABLE IF NOT EXISTS comments (
 );
 ```
 
-## Bonus
-
-You get 5 bonus points if I can run the code in GitHub Workspaces.
-It supports:
-
-- dotnet 8.0.203
-- Python 3.10.13
-- node v20.11.1
-- sqlite3 3.41.2
-- Docker 24.0.9-1
-
-Please include script to generate tables.
+Or make your own schema.
+You are not required to use a SQL database.
 
 ## Limitations
 
@@ -104,6 +96,12 @@ You can use either:
 Front-end isn't required, nor expected.
 A simple REST API is fine.
 
+If you use .NET for back-end you can take advantage of [ASP.NET Core
+Identity](https://learn.microsoft.com/en-us/aspnet/core/security/authentication/identity-api-authorization).
+
+If your framework of choice provides an easy way to add Swagger UI or similar,
+then please include it in your solution.
+
 I will accept solutions using in-memory data storage like Dictionary (C#),
 HashMap (Java) and Dict (Python).
 Though a database is preferred.
@@ -113,3 +111,18 @@ Though a database is preferred.
 Link to GitHub repository with the code for your solution and README with
 commands to get started.
 
+It should be possible to start the application just by cloning the repository and
+running `docker compose up`.
+
+`README.md` should contain an example of interacting with the API.
+
+Ideal group size is 2 persons.
+
+## Summary
+
+Implement a web-API enforcing the described access-control policies.
+
+Make it simple to evaluate your solution.
+
+If I have to fiddle around with things to get your solution running or figure
+out how to interact with the API, then I'm not going to evaluate it.
