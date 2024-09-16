@@ -28,7 +28,7 @@ adds.
 Guests can still read articles published on the site, but will be presented with
 ads.
 
-(Implementing ads are part of this assignment)
+(Implementing ads are **NOT** part of this assignment)
 
 ## Policy
 
