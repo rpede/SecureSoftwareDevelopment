@@ -1,54 +1,150 @@
-# Hybrid crypto assignment
+# Cryptography Workshop
 
-Most real world applications use a mixture of asymmetric and symmetric
-cryptography.
+## Background
 
-The exact details of how this is done depends on the specific problem.
+In today's workshop you are going explore some cryptographic concepts with some
+hands-on exercise.
 
-Generally we use asymmetric (public-key) crypto agree on a shared (symmetric)
-key which is then used to encrypt and decrypt the data.
+In general you should prefer using existing cryptographic protocols where
+possible.
+Because any small mistake can leave it vulnerable.
+However, it is still good to have some experience in working with various
+algorithms to know how to use them and what pitfalls or limitations there are.
 
-**Level 1**
+For the exercises to make sense you will be working in a setting where two
+applications are communicating over the network.
+Both applications can run on your own machine.
+Just pretend there is a malicious person
+[sniffing](https://en.wikipedia.org/wiki/Sniffing_attack) the traffic between
+the applications.
 
-Write a program that uses hybrid cryptography to send messages.
+## Sockets
 
-Use asymmetric cryptography in combination with key exchange to share a session
-key.
-Then use symmetric cryptography to an exchange message using the session key.
+I think the easiest way to get started is simply to use raw TCP sockets.
 
-I recommend Elliptic-curve Diffie–Hellman (ECDH) for key exchange and
-AES-GCM-256 for messages.
+Since the majority of students in the class are working in .NET, then I've made
+a small wrapper around the built-in socket, that can make it a bit easier to
+work with.
+See
+[SocketWrapper.cs](https://gist.github.com/rpede/71e406c9d287aac4cd5eaf4aa3722d2b).
 
-1. Exchange public keys
-2. On both ends, derive a key from the original key pair and the partners public key
-3. One side generates a session key, encrypts it with derived key
-4. Partner decrypts the session key using derived key
-5. Use session key to encrypt+decrypt message
+You can layer JSON on top if you need more structure to the messages
+send/received.
 
-Use whatever programming language you want.
-
-**Level 2 (optional)**
-
-Modify your program such that you can exchange messages over a [TCP
-socket](https://www.geeksforgeeks.org/socket-in-computer-network/) or
-[WebSocket](https://www.geeksforgeeks.org/what-is-web-socket-and-how-it-is-different-from-the-http/).
-
-You will need to program.
-One that listens for connections (server).
-And another that connects to the first (client).
-
-Work out how to encode the exchange and what order to send/receive.
-
-Pay attention that parameters used for cryptographic operations on both ends
-work together. Including to padding scheme.
-
-There are different standard formats for keys/certificates.
-An example is X.509 with ASN.1-DER encoding.
-Find out how you can export the public key in a format that can be sent over
-the socket and imported at the other end.
+You are not required to use a specific programming language in this course.
+You can use whatever programming language you prefer for the exercises.
+Here are some links to learn more about sockets in various programming
+languages.
 
 - [TCP Overview in .NET](https://learn.microsoft.com/en-us/dotnet/fundamentals/networking/sockets/tcp-classes)
 - [Python - Socket Programming HOWTO](https://docs.python.org/3/howto/sockets.html)
 - [A Guide to Java Sockets](https://www.baeldung.com/a-guide-to-java-sockets)
 - [Socket.IO (JavaScript)](https://socket.io/)
 
+You will need two programs.
+One that listens for connections (server).
+And another that connects to the first (client).
+
+![Client and server communicating over a TCP socket](./client-server.drawio.png)
+
+Once a connection have been established, client and server can
+send messages back and forth.
+
+Client or server can simply take turns either sending or receiving messages.
+
+## Crypto libraries
+
+You will need a crypto library that implements the various algorithms referred
+to in the exercises.
+Here are some:
+
+**.NET**
+
+- [System.Security.Cryptography](https://learn.microsoft.com/en-us/dotnet/api/system.security.cryptography)
+
+**Python**
+
+- [PyCryptodome](https://www.pycryptodome.org/)
+- [cryptography](https://cryptography.io/)
+
+**Node.js**
+
+- [Crypto](https://nodejs.org/api/crypto.html)
+
+Prefer built-in libraries over 3rd party libraries.
+If an algorithm isn't provided by built-in library then pick a popular 3rd
+party.
+
+## Exercises
+
+### Exercise 1
+
+Send an encrypted message over the socket.
+The messages must be decrypted on the other end using a pre-shared symmetric
+key.
+
+You can use AES-GCM as cipher.
+Remember IV needs to be unique each time you encrypt a message.
+Use a [Cryptographically secure pseudorandom number
+generator](https://en.wikipedia.org/wiki/Cryptographically_secure_pseudorandom_number_generator)
+such as
+[RandomNumberGenerator](https://learn.microsoft.com/en-us/dotnet/api/system.security.cryptography.randomnumbergenerator).
+
+For .NET see [Authenticated Encryption in .NET with
+AES-GCM](https://www.scottbrady91.com/c-sharp/aes-gcm-dotnet).
+
+### Exercise 2
+
+The same as in previous exercise, but use an encryption key derived from a
+password instead.
+
+In .NET there are two implementations of
+[PBKDF2](https://en.wikipedia.org/wiki/PBKDF2).
+[KeyDerivation.Pbkdf2](https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.cryptography.keyderivation.keyderivation.pbkdf2) and [Rfc2898DeriveBytes.Pbkdf2](https://learn.microsoft.com/en-us/dotnet/api/system.security.cryptography.rfc2898derivebytes.pbkdf2?).
+
+For [Argon2](https://en.wikipedia.org/wiki/Argon2),
+[scrypt](https://en.wikipedia.org/wiki/Scrypt) and
+[bcrypt](https://en.wikipedia.org/wiki/Bcrypt) you might need a 3rd party
+package.
+
+### Exercise 3
+
+Same as previous, but use a variant of [Diffie–Hellman key
+exchange](https://en.wikipedia.org/wiki/Diffie%E2%80%93Hellman_key_exchange)
+instead of having a pre-shared key / secret.
+
+Make a DHKE between the communicating parties.
+Then encrypt the message at one end using the resulting key.
+Decrypt at the other end.
+
+You can use Elliptic Curve Diffie-Hellman.
+For .NET use
+[ECDiffieHellman](https://learn.microsoft.com/en-us/dotnet/api/system.security.cryptography.ecdiffiehellman?view=net-8.0).
+
+Note: you will need to export the public key and send it to the other end.
+
+### Exercise 4
+
+Modify your solution from previous exercise such that a [session
+key](https://en.wikipedia.org/wiki/Session_key) is used to encrypt the message.
+
+On the end that is sending the message, you should:
+
+1. Generate a random key `SK` (used as session key)
+2. Use `SK` to encrypt the message
+3. Encrypt `SK` using the shared secret from DHKE
+4. Send the encrypted message + encrypted `SK` to receiver
+
+On receiving end:
+
+1. Decrypt `SK` using shared secret from DHKE
+2. Decrypt message using `SK`
+
+Elliptic Curve (EC) cryptography can **not** encrypt data directly.
+A hybrid crypto system is used to provide encryption with EC.
+Hybrid means combining symmetric and asymmetric cryptography like in this
+exercise.
+
+Is your solution safe from [man-in-the-middle
+attacks (MITM)](https://en.wikipedia.org/wiki/Man-in-the-middle_attack)?
+What will it take to make it resilient against MITM attacks?
