@@ -18,6 +18,9 @@ Just pretend there is a malicious person
 [sniffing](https://en.wikipedia.org/wiki/Sniffing_attack) the traffic between
 the applications.
 
+Create your solution to the exercises as a console application.
+It is okay to hard-code the messages.
+
 ## Sockets
 
 I think the easiest way to get started is simply to use raw TCP sockets.
