@@ -5,7 +5,7 @@
 In today's workshop you are going explore some cryptographic concepts with some
 hands-on exercise.
 
-In general you should prefer using existing cryptographic protocols where
+In general, you should prefer using existing cryptographic protocols where
 possible.
 Because any small mistake can leave it vulnerable.
 However, it is still good to have some experience in working with various
@@ -32,7 +32,7 @@ You can layer JSON on top if you need more structure to the messages
 send/received.
 
 You are not required to use a specific programming language in this course.
-You can use whatever programming language you prefer for the exercises.
+So, you can use whatever programming language you prefer for the exercises.
 Here are some links to learn more about sockets in various programming
 languages.
 
