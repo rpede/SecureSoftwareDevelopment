@@ -37,7 +37,10 @@ However, the requirements increase with the group size.
 - 3 persons: Plan for how a user can access their credentials across devices.
 - 4 persons: Implement a way to access credentials across devices.
 
-I'm not expecting anything as advanced as in the papers you read.
+In addition to the program itself, you also need to provide setup instructions
+and a description of your security model.
+It is strongly recommended that you get feedback on the security model from
+your teacher before hand-in.
 
 Project is compulsory/mandatory!
 
