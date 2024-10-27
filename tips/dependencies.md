@@ -184,3 +184,20 @@ python3 -m cyclonedx_py requirements
 ```
 
 See [CycloneDX Python SBOM Generation Tool](https://github.com/CycloneDX/cyclonedx-python)
+
+## Analyze SBOM
+
+A tool like Dependency-Track can be used to analyze SBOM.
+
+```sh
+# Downloads the latest Docker Compose file
+curl -LO https://dependencytrack.org/docker-compose.yml
+
+# Starts the stack using Docker Compose
+docker compose up -d
+```
+
+- Username: admin
+- Password: admin
+
+[Documentation](https://docs.dependencytrack.org/)
