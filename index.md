@@ -2,7 +2,7 @@
 title: "Secure Software Development"
 ---
 
-## Assignments
+## Exercises
 
 - [Pentest](assignments/pentest)
 - [Authorization](assignments/authorization)
@@ -12,3 +12,6 @@ title: "Secure Software Development"
 - [OpenID Connect client](assignments/oidc)
 - [CI/CD](assignments/cicd)
 
+## Tips
+
+- [Tips](/tips/dependencies)
