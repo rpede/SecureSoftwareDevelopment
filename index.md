@@ -14,4 +14,4 @@ title: "Secure Software Development"
 
 ## Tips
 
-- [Tips](/tips/dependencies)
+- [Tips](tips/dependencies)
