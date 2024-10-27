@@ -197,7 +197,19 @@ curl -LO https://dependencytrack.org/docker-compose.yml
 docker compose up -d
 ```
 
+Open <http://localhost:8080/>
+
+**Login**
+
 - Username: admin
 - Password: admin
+
+**Analyze**
+
+1. Create a project
+2. Go to "Components" tab for the project and upload the SBOM
+3. Refresh and inspect the results
+
+![Showing SBOM analysis](../dependency-track-components.png)
 
 [Documentation](https://docs.dependencytrack.org/)
