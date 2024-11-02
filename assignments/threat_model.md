@@ -1,5 +1,26 @@
 # Threat modeling assignment
 
+<!--toc:start-->
+
+- [Threat modeling assignment](#threat-modeling-assignment)
+  - [Introduction](#introduction)
+  - [Security requirements](#security-requirements)
+  - [Sub-systems](#sub-systems)
+    - [Database](#database)
+    - [Authentication & Authentication](#authentication-authentication)
+    - [Hosting](#hosting)
+  - [Functional requirements](#functional-requirements)
+    - [Registration](#registration)
+    - [Login](#login)
+    - [Requirements](#requirements)
+  - [Database schema](#database-schema)
+  - [What you need to do](#what-you-need-to-do)
+    - [1. Diagram](#1-diagram)
+    - [2. Identify threats](#2-identify-threats)
+    - [3. Address the threats](#3-address-the-threats)
+  - [Hand-in](#hand-in)
+  <!--toc:end-->
+
 ## Introduction
 
 Passwordify is a password management service from BestVPN Inc.
