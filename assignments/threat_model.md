@@ -23,8 +23,10 @@ Passwordify will consist of the following sub-systems:
 
 - Desktop client
 - Mobile client
-- REST API
 - Web UI
+- Authorization server
+- REST API
+- Document store (MongoDB)
 
 The source code for all sub-systems is kept in a
 [monorepo](https://en.wikipedia.org/wiki/Monorepo).
@@ -32,23 +34,39 @@ The source code for all sub-systems is kept in a
 The plan is to build both desktop and mobile clients from the same .NET MAUI
 codebase.
 
-The web UI will be a PHP application, since that is what they use for the main
-company site.
+The web UI will be a PHP application.
+Since that is what they use for the main company website.
 
 The REST API will be a Node+Express application using Mongoose to communicate
 with a MongoDB database.
 
+### Database
+
 The back-end team is worried about SQLi, so they decided to go with a NoSQL
 database.
-They also thought NoSQL sounded cool and that a document store was fitting for
-their data model.
+With all the talk that has been around NoSQL, they thought of it as future
+proofing the system.
+Out of the different types NoSQL database, they thought a document store was
+the most fitting for their data model.
+
+### Authentication & Authentication
 
 The API supports both cookie based authorization and JWT in custom header.
 Cookies are used for authorization of the web UI.
-JWT for mobile and desktop client.
+JWT is for mobile and desktop client.
+
+The JWTs are issued by the authorization server using OAuth 2.0 authorization
+code flow.
+The signature is validated in REST API using a shared secret (symmetric
+signature).
+
+### Hosting
 
 They will use their existing Apache web server to serve the web UI for
-Passwordify, and it will also act as a reverse proxy for the REST API.
+Passwordify.
+The server is currently used to serve their WordPress based marketing site.
+It will also act as a reverse proxy for the REST API hosted on a separate Nginx
+server.
 They expect that the number of users will grow over time, in which case they
 will eventually reconfigure Apache to also act as a load balancer.
 
@@ -62,19 +80,24 @@ needs full access to manage the servers.
 ### Registration
 
 In order to ease adoption, they want users to be able to user their existing
-login, and then automatically create a password vault for the user first time
-they access the new Passwordify feature.
+login.
+It will automatically create a password vault for the user first time they
+access the new Passwordify feature.
 
 ### Login
 
-Users should be able login with a combination of password and then either email
-or username.
-The login process should look identical across clients (web, mobile & desktop).
+Users should be able login with a combination of email/username and password.
+
+For web, login is done directly through the REST API which sets a session
+cookie.
+
+For mobile and desktop, the login process happens through the authorization
+server.
 
 Side-note: A SHA512 of the password is currently stored in a MySQL database,
-used by the VPN service.
+used for their VPN service.
 
-### Operations
+### Requirements
 
 Authenticated users should be able to:
 
@@ -90,7 +113,7 @@ Unauthenticated users can:
 - Create an account.
 - View status page.
 
-## Database
+## Database schema
 
 This is the intended database model.
 
@@ -133,31 +156,41 @@ is used on the database server.
 
 ## What you need to do
 
-Apply appropriate threat modeling technique.
+Form a group of 3-5 members.
 
-Document potential threats.
+Imagine you are a developer at BestVPN Inc.
+Apply appropriate threat modeling technique to threat model the system
+Passwordify described above.
+
+### 1. Diagram
+
+Draw a DFD of the Passwordify.
+Diagram in multiple layers as you find appropriate in order to capture
+meaningful details, without making it too intricate.
+
+### 2. Identify threats
+
+Use either STRIDE or attack trees to find potential threats.
+Refer to the diagram(s) in part 1.
+
+### 3. Address the threats
+
+For each threat you've found in part 2, write down how you think the company
+should deal with the threat.
 
 Should the security requirements be changed?
 
-Document how you would verify that threats have been addressed before release.
-
-In the real world you would verify that all applicable threats have been
-addressed before release.
-But, to limit the scope of this assignment, you are only required to document how
-to verify for some of the threats you find.
-
-Focus on Passwordify.
-Don't threat model the VPN service.
-
 ## Hand-in
 
-Accepted file types are PDF, SVG, PNG and JPG.
+Hand-in a PDF with your threat modeling.
+The PDF should include diagrams, threats found and how they could be addressed.
 
-Should include relevant diagrams, list of applicable threats + how to address.
-It must be clear which part of the diagram a threat relates to.
+Remember to number elements in your diagram, so you can refer to it in your
+list of threats.
+Each threat must also have a number.
 
-Also include any refinements to the security requirements.
+Also include any refinements to the security requirements that you think will
+improve the overall security posture of the system.
 
 [Learn about security
 requirements](https://www.synopsys.com/blogs/software-security/software-security-requirements.html)
-
