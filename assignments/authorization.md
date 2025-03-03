@@ -113,6 +113,7 @@ commands to get started.
 
 It should be possible to start the application just by cloning the repository and
 running `docker compose up`.
+Or if you use the starter project with `dotnet run`.
 
 `README.md` should contain an example of interacting with the API.
 
