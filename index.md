@@ -6,8 +6,8 @@ title: "Secure Software Development"
 
 - [Pentest](assignments/pentest)
 - [Authorization](assignments/authorization)
-- [Crypto](assignments/crypto)
-- [Mini-project](assignments/mini-project)
+- [Crypto lib](assignments/crypto_lib)
+- [Mini-project](assignments/chat)
 - [Threat modeling](assignments/threat_model)
 - [OpenID Connect client](assignments/oidc)
 - [CI/CD](assignments/cicd)

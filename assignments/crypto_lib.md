@@ -28,7 +28,6 @@ listed below.
 
 Please include links to resources and libraries you use.
 
-
 ## Algorithms
 
 ### cryptographic random number generator (CRNG)
@@ -58,9 +57,13 @@ Your example should encrypt a message a decrypt it again.
 
 Use previous code example to generate an encryption key.
 
-You also need an IV (sometimes called Nonce).
-It is usually 96 bit long.
-Same IV is required for decryption.
+You also need an IV, short for initialization vector, also sometimes referred
+to as Nonce.
+An IV is just a random value generated using a cryptographically secure
+pseudorandom number generator (CSPRNG).
+The same IV that was use for encryption is also required for decryption.
+Search "<your programming language> secure random" on your favorite search
+engine to find out how to generate an IV.
 
 You need to generate a new IV for each plain-text that you
 encrypt.
@@ -114,3 +117,6 @@ Provide an example of using PBKDF2-HMAC-SHA512 to derive a key from a password.
 That is [PBKDF2 (Password-Based Key Derivation Function 2)](https://en.wikipedia.org/wiki/PBKDF2) using HMAC-SHA512 as the underlaying
 algorithm.
 
+OWASP recommended to use 600,000 iterations.
+
+**For password storage I recommend using Argon2id.**
