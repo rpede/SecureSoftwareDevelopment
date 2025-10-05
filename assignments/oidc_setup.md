@@ -21,15 +21,21 @@ Open [http://localhost:8080/admin/](http://localhost:8080/admin/) and login with
 
 Under "Clients" in sidebar, click "Create Client".
 
+![Keycloak clients](./keycloak-clients.png)
+
 **General Settings**
 
 Client Type: OpenID Connect
 
 Client ID: type an ID for your client
 
+![Keycloak client General settings](./keycloak-client-settings.png)
+
 **Capability Config**
 
 Make sure that "Client authentication" is on.
+
+![Keycloak client Capability](./keycloak-client-capability.png)
 
 **Login Settings**
 
@@ -37,9 +43,16 @@ Valid redirect URIs: callback / redirect of your client
 
 Now "Save"
 
+_You might not know the redirect URI before starting to implement the client.
+So come back and adjust later._
+
+![Keycloak client Login settings](./keycloak-client-login-settings.png)
+
 **Credentials**
 
 You can now find client credentials under the "Credentials" tab.
+
+![Keycloak client secret](./keycloak-client-secret.png)
 
 ## Endpoints
 
