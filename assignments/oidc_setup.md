@@ -57,17 +57,3 @@ You can now find client credentials under the "Credentials" tab.
 ## Endpoints
 
 You can find all the endpoints by going to "Realm settings" then open [OpenID Endpoint Configuration](http://localhost:8080/realms/master/.well-known/openid-configuration).
-
-## Client / Relay Party
-
-If you want to verify the settings, you could try the following.
-
-(Replacing `{client_id}` and `{client_secret}` with client credentials you just
-created)
-
-```sh
-git clone https://github.com/mcguinness/oidc-rp
-cd oidc-rp
-npm install
-node server.js --iss http://localhost:8080/realms/master --cid {client_id} --cs {client_secret}
-```
