@@ -5,6 +5,8 @@
 Create a web application that allows users to authenticate using their
 credentials in Keycloak.
 
+![Sequence diagram of authorization code flow](./oidc-sequence.drawio.svg)
+
 ## Project setup
 
 You don't need any client side scripting to solve the assignment.
@@ -501,4 +503,3 @@ See [Flask Sessions](https://flask.palletsprojects.com/en/3.0.x/quickstart/#sess
 
 For express, you can use the [session
 middleware](https://www.npmjs.com/package/express-session).
-
