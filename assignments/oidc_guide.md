@@ -448,6 +448,8 @@ the token.
 
 ### C-Sharp (C#)
 
+Use the nuget package `System.IdentityModel.Tokens.Jwt` to verify ID token.
+
 ```csharp
 var response = await new HttpClient().GetAsync(config.jwks_uri);
 var keys = await response.Content.ReadAsStringAsync();
