@@ -1,5 +1,24 @@
 # Dependencies
 
+<!--toc:start-->
+- [Dependencies](#dependencies)
+  - [Avoid typo-squatting](#avoid-typo-squatting)
+  - [Scan dependencies](#scan-dependencies)
+    - [Node](#node)
+    - [Python](#python)
+    - [.NET](#net)
+    - [Java](#java)
+      - [Maven](#maven)
+      - [Gradle](#gradle)
+  - [Software Bill of Materials (SBOM)](#software-bill-of-materials-sbom)
+    - [npm (SBOM)](#npm-sbom)
+    - [.NET (SBOM)](#net-sbom)
+    - [Python (SBOM)](#python-sbom)
+  - [Analyze SBOM](#analyze-sbom)
+    - [Analyze](#analyze)
+    - [Vulnerability sources](#vulnerability-sources)
+<!--toc:end-->
+
 ## Avoid typo-squatting
 
 A common tactic for distributing malicious package is to register a package with a similar name to another popular package, and hope people mistype the package name.
@@ -47,7 +66,7 @@ all your project is a hassle and unfeasible for most.
 
 Luckily there are tools out there to automate this process.
 
-### Node
+### Node (Scan)
 
 This is very simple, since it is build in to the package manager.
 
@@ -63,7 +82,7 @@ npm audit
 npm audit --fix
 ```
 
-### Python
+### Python (Scan)
 
 For Python packages we need to install a tool.
 I strongly recommend using a [virtual
@@ -96,7 +115,7 @@ python -m pip_audit -r requirements.txt
 python -m pip_audit -r requirements.txt --fix
 ```
 
-### .NET
+### .NET (Scan)
 
 **Scan**
 
@@ -114,7 +133,7 @@ dotnet tool install --global dotnet-outdated-tool
 dotnet outdated --upgrade
 ```
 
-### Java
+### Java (Scan)
 
 Unfortunately a vulnerability isn't built-in.
 But, you can fairly easily add one as a plugin.
@@ -158,17 +177,20 @@ plugins {
 
 ## Software Bill of Materials (SBOM)
 
-### npm
+### npm (SBOM)
 
 ```sh
-npm sbom --sbom-format cyclonedx
+npm sbom --sbom-type application --sbom-format cyclonedx --legacy-peer-deps > bom.json
 ```
 
-### .NET
+### .NET (SBOM)
 
-See [SBOM Tool](https://github.com/microsoft/sbom-tool)
+```sh
+dotnet tool install --global CycloneDX
+dotnet-CycloneDX --set-type Application --output-format json Project.csproj
+```
 
-### Python
+### Python (SBOM)
 
 CycloneDX can be used to.
 It is a dependency of pip-audit, but can also be installed alone with:
@@ -204,12 +226,24 @@ Open <http://localhost:8080/>
 - Username: admin
 - Password: admin
 
-**Analyze**
+### Analyze
 
 1. Create a project
 2. Go to "Components" tab for the project and upload the SBOM
 3. Refresh and inspect the results
 
 ![Showing SBOM analysis](../dependency-track-components.png)
+
+### Vulnerability sources
+
+**GitHub Advisory:**
+
+Go to "Administration" -> "GitHub Advisories" and insert your personal access
+token.
+
+**Google OSV Advisory**
+
+Go to "Administration" -> "Google OSV Advisories (Beta)", under "Ecosystem" add
+npm, NuGet, PyPi or whatever sources of dependencies are used in your project.
 
 [Documentation](https://docs.dependencytrack.org/)
