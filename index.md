@@ -7,7 +7,7 @@ title: "Secure Software Development"
 - [Pentest](assignments/pentest)
 - [Authorization](assignments/authorization)
 - [Crypto lib](assignments/crypto_lib)
-- [Mini-project](assignments/chat)
+- [Mini-project](/assignments/password-manager-simple)
 - [Threat modeling](assignments/threat_model)
 - [OpenID Connect client](assignments/oidc)
 - [CI/CD](assignments/cicd)
