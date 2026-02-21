@@ -10,7 +10,8 @@ But that's where things usually stop.
 Simply checking that a user is authenticated is not enough for a real world
 application.
 
-Following the principle of least privilege we almost always need more fine-grained control.
+Following the principle of least privilege we almost always need more
+fine-grained control.
 
 The aim of this assignment is for you to explorer this field within your
 tech-stack of choice.
@@ -28,7 +29,9 @@ adds.
 Guests can still read articles published on the site, but will be presented with
 ads.
 
-(Implementing ads are **NOT** part of this assignment)
+(Implementing ads are out-of-scope)
+
+You can use whatever web-framework you like to implement the solution.
 
 ## Policy
 
@@ -79,10 +82,20 @@ CREATE TABLE IF NOT EXISTS comments (
 );
 ```
 
-Or make your own schema.
+- `articles.author_id` is the id of the writer/journalists who wrote the article.
+- `comments.user_id` is the id of the subscriber who wrote the comment.
+
+You can also create your own schema instead.
 You are not required to use a SQL database.
 
+It is also acceptable to use an in-memory data storage like Dictionary (C#),
+HashMap (Java) and Dict (Python) instead of a database.
+Though a database is preferred.
+
 ## Limitations
+
+Implementing an advertising system is out of scope.
+Focus on CRUD endpoints and authorization policies.
 
 As said, this will be a proof of concept.
 Focus is on authorization / access control.
@@ -99,15 +112,27 @@ You can use either:
 Front-end isn't required, nor expected.
 A simple REST API is fine.
 
+## Tips
+
+You are allowed to user GenAI (ChatGPT, Claude, Gemini, Copilot etc) to create
+the endpoints.
+You might need to take it step-by-step.
+Start with data-access.
+Then CRUD endpoints for articles.
+Last, CRUD endpoints for comments.
+**Do not** prompt it to implement authorization/access-control.
+The whole point is that you should gain a good understanding on how to
+implement authorization rules in your preferred framework.
+Referrer to the documentation for your framework rather than prompting.
+
 If you use .NET for back-end you can take advantage of [ASP.NET Core
 Identity](https://learn.microsoft.com/en-us/aspnet/core/security/authentication/identity-api-authorization).
 
-If your framework of choice provides an easy way to add Swagger UI or similar,
-then please include it in your solution.
-
-I will accept solutions using in-memory data storage like Dictionary (C#),
-HashMap (Java) and Dict (Python).
-Though a database is preferred.
+Using something like [Swagger UI](https://swagger.io/tools/swagger-ui/) or
+[Scalar](https://scalar.com/) to test the API, is a good idea if your framework
+of choice supports it.
+Alternatively you could use Postman or write integrations test to validate your
+authorization polices.
 
 ## Deliverable
 
