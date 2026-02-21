@@ -117,9 +117,11 @@ A simple REST API is fine.
 You are allowed to user GenAI (ChatGPT, Claude, Gemini, Copilot etc) to create
 the endpoints.
 You might need to take it step-by-step.
-Start with data-access.
-Then CRUD endpoints for articles.
-Last, CRUD endpoints for comments.
+
+1. Start with the data-access layer.
+2. Then CRUD endpoints for articles.
+3. Last, CRUD endpoints for comments.
+
 **Do not** prompt it to implement authorization/access-control.
 The whole point is that you should gain a good understanding on how to
 implement authorization rules in your preferred framework.
