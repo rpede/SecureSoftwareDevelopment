@@ -35,15 +35,18 @@ ads.
 Your task is to implement authorization as a proof-of-concept that enforces the
 following policy.
 
-- Editor can:
-  - Edit, and delete articles.
-  - Edit and delete user comments.
-- Writer / Journalist can:
-  - Create and edit their own articles.
-- Subscriber / Registered User can:
-  - Comment on articles.
 - Guest / Public User can:
-  - Read articles.
+  - Read articles and comments.
+- Subscriber / Registered User can also:
+  - Create comments on articles.
+  - Update and delete comments on articles.
+- Editor can:
+  - Read, edit, and delete articles.
+  - Read, edit and delete user comments.
+- Writer / Journalist can:
+  - Read all articles.
+  - Create, edit and delete their own articles.
+  - Delete user comments on their own articles.
 
 ## Schema
 
