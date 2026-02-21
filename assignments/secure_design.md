@@ -14,6 +14,8 @@ investigation of wrongful activity within an organization.
 The person (employee) reporting wrongful activity could fear harmful
 repercussions, if their identity becomes known.
 
+## Exercise
+
 The app should allow employees to anonymously report issues that demand
 attention.
 Appointed investigators at the company/organization should be able to
