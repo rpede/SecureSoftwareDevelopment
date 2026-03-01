@@ -199,3 +199,10 @@ Are there things you would change?
 
 Discuss what security requirements would be appropriate for at password manger
 like this.
+
+## Feedback
+
+If you or your group want feedback on your work, then email me the artifacts
+you produced.
+I prefer PDF.
+And it should be described so I can understand it.
