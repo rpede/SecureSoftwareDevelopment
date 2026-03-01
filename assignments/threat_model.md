@@ -1,13 +1,12 @@
-# Threat modeling assignment
+# Threat modeling exercise
 
 <!--toc:start-->
-
-- [Threat modeling assignment](#threat-modeling-assignment)
+- [Threat modeling exercise](#threat-modeling-exercise)
   - [Introduction](#introduction)
   - [Security requirements](#security-requirements)
   - [Sub-systems](#sub-systems)
     - [Database](#database)
-    - [Authentication & Authentication](#authentication-authentication)
+    - [Authentication & Authorization](#authentication-authorization)
     - [Hosting](#hosting)
   - [Functional requirements](#functional-requirements)
     - [Registration](#registration)
@@ -18,8 +17,8 @@
     - [1. Diagram](#1-diagram)
     - [2. Identify threats](#2-identify-threats)
     - [3. Address the threats](#3-address-the-threats)
-  - [Hand-in](#hand-in)
-  <!--toc:end-->
+    - [4. Evaluation](#4-evaluation)
+<!--toc:end-->
 
 ## Introduction
 
@@ -52,14 +51,12 @@ Passwordify will consist of the following sub-systems:
 The source code for all sub-systems is kept in a
 [monorepo](https://en.wikipedia.org/wiki/Monorepo).
 
-The plan is to build both desktop and mobile clients from the same .NET MAUI
-codebase.
-
-The web UI will be a PHP application.
-Since that is what they use for the main company website.
-
-The REST API will be a Node+Express application using Mongoose to communicate
-with a MongoDB database.
+The plan is to build both **desktop** and **mobile clients** from the same .NET
+MAUI codebase.
+The **web UI** will be a PHP application, since that is what they use for the
+main company site.
+The **REST API** will be a Node+Express application using Mongoose to
+communicate with a MongoDB database.
 
 ### Database
 
@@ -70,16 +67,11 @@ proofing the system.
 Out of the different types NoSQL database, they thought a document store was
 the most fitting for their data model.
 
-### Authentication & Authentication
+### Authentication & Authorization
 
 The API supports both cookie based authorization and JWT in custom header.
 Cookies are used for authorization of the web UI.
 JWT is for mobile and desktop client.
-
-The JWTs are issued by the authorization server using OAuth 2.0 authorization
-code flow.
-The signature is validated in REST API using a shared secret (symmetric
-signature).
 
 ### Hosting
 
@@ -177,7 +169,7 @@ is used on the database server.
 
 ## What you need to do
 
-Form a group of 3-5 members.
+Form a group of 2-5 members.
 
 Imagine you are a developer at BestVPN Inc.
 Apply appropriate threat modeling technique to threat model the system
@@ -199,19 +191,11 @@ Refer to the diagram(s) in part 1.
 For each threat you've found in part 2, write down how you think the company
 should deal with the threat.
 
-Should the security requirements be changed?
+### 4. Evaluation
 
-## Hand-in
+Discuss the requirements and technical design of Passwordify in relation to
+security.
+Are there things you would change?
 
-Hand-in a PDF with your threat modeling.
-The PDF should include diagrams, threats found and how they could be addressed.
-
-Remember to number elements in your diagram, so you can refer to it in your
-list of threats.
-Each threat must also have a number.
-
-Also include any refinements to the security requirements that you think will
-improve the overall security posture of the system.
-
-[Learn about security
-requirements](https://www.synopsys.com/blogs/software-security/software-security-requirements.html)
+Discuss what security requirements would be appropriate for at password manger
+like this.

@@ -29,14 +29,12 @@ Passwordify will consist of the following sub-systems:
 The source code for all sub-systems is kept in a
 [monorepo](https://en.wikipedia.org/wiki/Monorepo).
 
-The plan is to build both desktop and mobile clients from the same .NET MAUI
-codebase.
-
-The web UI will be a PHP application, since that is what they use for the main
-company site.
-
-The REST API will be a Node+Express application using Mongoose to communicate
-with a MongoDB database.
+The plan is to build both **desktop** and **mobile clients** from the same .NET
+MAUI codebase.
+The **web UI** will be a PHP application, since that is what they use for the
+main company site.
+The **REST API** will be a Node+Express application using Mongoose to
+communicate with a MongoDB database.
 
 The backend team is worried about SQLi, so they decided to go with a NoSQL
 database.
