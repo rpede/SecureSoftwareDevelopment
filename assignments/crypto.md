@@ -148,6 +148,10 @@ A hybrid crypto system is used to provide encryption with EC.
 Hybrid means combining symmetric and asymmetric cryptography like in this
 exercise.
 
+### Exercise 5
+
+Answer the following questions about your solution to exercise 4.
+
 Is your solution safe from [man-in-the-middle
 attacks (MITM)](https://en.wikipedia.org/wiki/Man-in-the-middle_attack)?
 What will it take to make it resilient against MITM attacks?
