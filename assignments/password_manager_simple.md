@@ -55,6 +55,11 @@ If you want feedback your solutions, then submit a link to a public repository
 with your code.
 The `README.md` should include setup instructions.
 
+If GenAI has been used to generate parts of the code, then I need to know what
+functions, classes, files etc have been generated.
+You can either provide the information as comments in the code or make a list
+in the README.
+
 I will only attempt to run your code [GitHub
 Codespaces](https://github.com/features/codespaces).
 Here are some info about the environment as of 2026-03-14:
