@@ -31,7 +31,7 @@ Credentials are stored in a "vault" which must be encrypted using.
 For that you can use a symmetric encryption algorithm such as AES with an
 appropriate mode of operation such as CBC or GCM.
 The encryption key should be derived from a master-password using a key
-derivation function such as Argon2id, Script, Bcrypt or PBKDF2.
+derivation function such as Argon2id, Scrypt, Bcrypt or PBKDF2.
 Tweak the parameters to make the key derivation slow enough that it becomes
 infeasible to crack, but not that slow that it becomes an annoyance to the
 user.
