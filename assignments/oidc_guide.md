@@ -12,7 +12,7 @@ credentials in Keycloak.
 You don't need any client side scripting to solve the assignment.
 Actually I would recommend doing without, because it just adds complexity.
 
-### .NET/C
+### .NET/C-Sharp
 
 Open a terminal/cmd/powershell
 
