@@ -10,7 +10,7 @@ You can find instructions on how to install docker engine
 Set up an identity provider with:
 
 ```sh
-docker run -p 8080:8080 -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=admin quay.io/keycloak/keycloak:21.1.0 start-dev
+docker run -p 127.0.0.1:8080:8080 -e KC_BOOTSTRAP_ADMIN_USERNAME=admin -e KC_BOOTSTRAP_ADMIN_PASSWORD=admin quay.io/keycloak/keycloak:26.5.6 start-dev
 ```
 
 See for details [Keycloak Docker](https://www.keycloak.org/getting-started/getting-started-docker)
