@@ -43,5 +43,6 @@ material this week.
 
 ## Deliverables
 
-Submit the material produced with a short description (less than 1 page) of the
-thought process behind.
+Submit the material produced with a short description of the thought process
+behind.
+The description should be less than 1 page.
