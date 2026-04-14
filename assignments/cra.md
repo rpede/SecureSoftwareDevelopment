@@ -8,18 +8,20 @@ of your development team in a large multinational company headquartered in
 Denmark.
 As a Security Champion, part of your responsibility is to bridge the gap
 between the company's security team and your own development team.
-The security team are pushing you to get your development team to conform with
+The security team are pushing you to get your development team to complies with
 cybersecurity requirements from <abbr title="Cyber Resilience Act">CRA</abbr>.
-But whenever you bring up those concerns during daily SCRUM or sprint planning,
-your team members are quick to brush them aside.
-Some common arguments they use to shut you down are:
-"We can't afford to waste time with that now, we need to deliver X feature by
-the end of this sprint" and "customers pays for features, not for whatever the
-security team cook up".
 
-You are getting slightly frustrated by the situation, so you devise a plan.
-The plan is to sit down with the security champions from the other development
-team and make a campaign to raise awareness.
+However, whenever you raise these concerns during daily SCRUM or sprint
+planning, your teammates are quick to dismiss them.
+Some common arguments include:
+
+- "We can't afford to waste time with that now, we need to deliver X feature by
+the end of this sprint"
+- "customers pays for features, not for whatever the security team comes up with".
+
+You are becoming frustrated by the situation, so you decide to take action.
+The plan is to meet with the security champions from the other development
+teams and plan a campaign to raise awareness.
 
 ## Task
 
